@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AKAI.TV — Все аниме онлайн в 1080p с выбором озвучки</title>
+
+  <!-- Шрифты -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Unbounded:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Таблица стилей -->
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- HLS.js для прямых потоков 1080p -->
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@1.5.15/dist/hls.min.js" defer></script>
+  <!-- Основной скрипт -->
+  <script src="app.js" defer></script>
+</head>
+<body>
+
+  <!-- Навигация -->
+  <header class="navbar">
+    <div class="container nav-inner">
+      <div class="nav-left">
+        <a href="#/home" class="brand logo-font">
+          <span class="brand-dot"></span>
+          AKAI<span class="text-accent">.TV</span>
+        </a>
+        <nav class="nav-links">
+          <a href="#/home" class="nav-link" data-nav="home">Главная</a>
+          <a href="#/catalog" class="nav-link" data-nav="catalog">Каталог (25 000+)</a>
+          <a href="#/ongoing" class="nav-link" data-nav="ongoing">Онгоинги</a>
+          <a href="#/bookmarks" class="nav-link" data-nav="bookmarks">
+            Закладки <span id="bm-count" class="bm-counter"></span>
+          </a>
+        </nav>
+      </div>
+
+      <div class="nav-right">
+        <form id="global-search-form" class="search-box">
+          <span class="search-icon">🔍</span>
+          <input
+            type="text"
+            id="global-search"
+            class="search-input"
+            placeholder="Поиск любого аниме (Наруто, Фрирен, Re:Zero)..."
+            autocomplete="off"
+          />
+        </form>
+
+        <button class="api-badge" id="toggle-api-btn" title="Настройки источников и токенов">
+          <span class="status-dot" id="api-dot"></span>
+          <span id="api-status-text">База: Shikimori + MultiDub</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Контент -->
+  <main class="container main-content">
+    <!-- Настройки API и озвучек -->
+    <section class="api-panel" id="api-panel">
+      <div class="api-panel-header">
+        <h3>Настройки глобального поиска и балансеров озвучки</h3>
+        <button class="btn btn-secondary btn-sm" id="close-api-panel">Закрыть</button>
+      </div>
+      <p class="api-panel-desc">
+        Поиск охватывает всю мировую базу аниме через <strong>Shikimori GraphQL API</strong> + <strong>Jikan MAL</strong> (более 25 000 тайтлов). Озвучки подгружаются через мульти-студийный балансер <strong>Kodik API</strong> и прямые потоки <strong>AniLiberty HLS 1080p</strong>.
+      </p>
+      <div class="api-panel-grid">
+        <div>
+          <label class="field-label" for="kodik-token-input">API-токен Kodik (встроен публичный ключ):</label>
+          <input
+            type="text"
+            id="kodik-token-input"
+            class="search-input no-icon"
+            value="b7cc4293ed475c4ad1fd599d114f4435"
+          />
+        </div>
+        <div>
+          <label class="field-label" for="default-dub-select">Предпочитаемая озвучка по умолчанию:</label>
+          <select id="default-dub-select" class="select-ui full-width">
+            <option value="all">Все доступные студии (Автовыбор лучшей)</option>
+            <option value="Студийная Банда">Студийная Банда (Studio Band)</option>
+            <option value="AniLibria">AniLibria.TV (Direct 1080p / Dub)</option>
+            <option value="Dream Cast">Dream Cast</option>
+            <option value="AniDUB">AniDUB</option>
+            <option value="AnimeVost">AnimeVost</option>
+            <option value="SHIZA Project">SHIZA Project</option>
+            <option value="Субтитры">Японский оригинал + Русские субтитры</option>
+          </select>
+        </div>
+      </div>
+    </section>
+
+    <!-- Контейнер активной страницы -->
+    <div id="app-view"></div>
+  </main>
+
+  <!-- Подвал -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div><strong class="logo-font text-light">AKAI.TV</strong> • Полная база аниме (#080808 / #C1121F)</div>
+      <div>Shikimori GraphQL • Jikan v4 • Kodik Multi-Dub • AniLiberty HLS 1080p</div>
+    </div>
+  </footer>
+
+</body>
+</html>
